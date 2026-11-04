@@ -4,8 +4,7 @@ use momento;
 ### Seu Primeiro Dia na Momento
 
 **1.1** Você acabou de ser contratado pela Momento! Vamos começar incluindo você no sistema.
-R: INSERT INTO funcionarios(funcionario_id,primeiro_nome,sobrenome,email,senha,telefone,data_contratacao,cargo_id,salario,gerente_id,departamento_id) VALUES (215,'Felipe','Alejandro','felipe.aosousa@momento.org.','AmendoaePistache123','96422-8015','2026-10-27','9','4000.00','100','6');
-215	Felipe	Alejandro	felipe.aosousa@momento.org	AmendoaePistache123	96422-8015	2026-10-27	9	4000.00	100	6
+
 
 **1.2** Agora que você faz parte da equipe, quantos funcionários temos ao total na empresa?
 R: SELECT COUNT(*) FROM funcionarios;
@@ -54,8 +53,9 @@ select * from funcionarios;
 
 -- 1.1 --
 -- 1.1 --
-INSERT INTO funcionarios (funcionario_id, primeiro_nome, sobrenome, email, telefone, data_contratacao, cargo_id, salario, gerente_id, departamento_id) VALUES ( 222, 'Felipe', 'Alejandro', 'felipe.aosousa@momento.org', '96422-8015', '2026-10-27', 9, 4000.00, 100, 6);
-UPDATE funcionarios from 
+-- 1.1 --
+
+INSERT INTO funcionarios (funcionario_id, primeiro_nome, sobrenome, email, telefone, data_contratacao, cargo_id, salario, gerente_id, departamento_id) VALUES (222,'Felipe','Alejandro', 'felipe.aosousa@momento.org', '+55 96422-8015', '2026-10-27', 9, 4000.00, 100, 6);
 
 -- 1.2 -- 
 SELECT COUNT(*) 
@@ -73,7 +73,6 @@ SELECT COUNT(*) from escritorios;
 SELECT escritorios.escritorio_nome, paises.pais_nome
 FROM escritorios
 JOIN paises ON escritorios.pais_id = paises.pais_id;
-
 
 /*## Nível 2: Análise Financeira Básica
 
@@ -120,8 +119,7 @@ SELECT AVG(salario) FROM funcionarios WHERE departamento_id = 6;
 SELECT departamento_id, AVG(salario) AS media_maior FROM funcionarios GROUP BY departamento_id ORDER BY AVG(salario) DESC LIMIT 1;
 
 -- 2.6 --
-SELECT departamento_id, COUNT(*) AS menor_número FROM 
-funcionarios GROUP BY departamento_id ORDER BY COUNT(*) ASC LIMIT 1;
+SELECT departamento_id, COUNT(*) AS menor_número FROM funcionarios GROUP BY departamento_id ORDER BY COUNT(*) ASC LIMIT 1;
 
 /*## Nível 3: Recursos Humanos
 
@@ -184,12 +182,9 @@ SELECT COUNT(data_contratacao) FROM funcionarios WHERE data_contratacao
 BETWEEN '1990-01-01' AND '1999-12-31';
 
 -- 3.7 --
-SELECT 
-    YEAR(data_contratacao) AS ano_contratacao,
-    ROUND(AVG(salario), 2) AS media_salarial
-FROM funcionarios
-GROUP BY YEAR(data_contratacao)
-ORDER BY ano_contratacao ASC;
+SELECT YEAR(data_contratacao) AS ano_contratacao, ROUND(AVG(salario), 2) AS media_salarial FROM funcionarios GROUP BY YEAR(data_contratacao)ORDER BY ano_contratacao ASC;
+
+
 /*
 Nível 4: Operações e Escritórios
 4.1 Qual é o custo total de suprimentos em cada escritório? Ordene do mais caro ao mais barato.
@@ -204,9 +199,4 @@ Nível 4: Operações e Escritórios
 
 -- 4.1 Qual é o custo total de suprimentos em cada escritório? Ordene do mais caro ao mais barato. --
 
-SELECT 
-    escritorio_id,     
-    SUM(custo_unitario) AS custo_total
-FROM suprimentos
-GROUP BY escritorio_id
-ORDER BY custo_total DESC;
+SELECT escritorio_id, SUM(custo_unitario) AS custo_total FROM suprimentos GROUP BY escritorio_id ORDER BY custo_total DESC;
